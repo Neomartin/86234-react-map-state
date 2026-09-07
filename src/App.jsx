@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
-import { devs } from "./devs";
+//! NO LO NECESITO MÁS import { devs } from "./devs"; 
+
 import './App.css'
-import Card from './components/card/Card';
+//! NO LO NECESITO CONOCERLO import Card from './components/card/Card';
+import CardContainer from './components/card-container/CardContainer';
 
 function App() {
 
@@ -15,6 +17,7 @@ function App() {
   // const setCounter = counterState[1];
 
   // setCounter(2)
+  const [nombre, setNombre] = useState("")
 
   function incrementar() {
     setCounter(counter + 1)
@@ -31,14 +34,35 @@ function App() {
 
   }
 
+  function cambiarNombre(evento) {
+    console.log(evento.target.value)
+
+    setNombre(evento.target.value)
+
+    console.log("Variable nombre", nombre)
+  }
+
+
+
 
   console.log("Componente renderizado")
-  console.log(devs) // array de objetos dessarolladores
 
   return (
     <div>
 
-      <h1>CONTADOR</h1>
+      <h1>Hola bienvenid@ {nombre}</h1>
+
+      <div style={
+        {
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px"
+        }
+      }>
+
+        <label htmlFor="">Nombre usuario</label>
+        <input type="text" onInput={cambiarNombre} name="" id="" placeholder="Ingrese su nombre" />
+      </div>
 
       <button onClick={incrementar}>+</button>
 
@@ -46,31 +70,13 @@ function App() {
 
       <button onClick={decrementar}>-</button>
 
-      <div className="devs-container">
 
-        {
-          devs.map((desarrollador) => {
-
-            return <Card dev={desarrollador} key={desarrollador.id} />
-
-            // return <div className="card" key={desarrollador.id}>
-            //         <div className="card-header">
-            //           {desarrollador.nombre}
-            //         </div>
-            //         <div className="card-body">
-            //           {desarrollador.stack}
-            //         </div>
-            //       </div>
-
-          })
-        }
-
-      </div>
+      <CardContainer />
 
 
 
 
-    </div>
+    </div >
   )
 
 }
